@@ -20,28 +20,76 @@ var _ = require('underbar');
  *
  *    IMPORTANT: Make sure you replace <YOUR_GITHUB_FOLDER with your actual github folder name that is in your workspace.
  */
-
 var maleCount = function(array) {
-
+    return _.reduce(array, function(count, customer) {
+        return customer.gender === 'male' ? count + 1 : count;
+    }, 0);
 };
 
-var femaleCount;
+module.exports.maleCount = maleCount;
 
-var oldestCustomer;
+var femaleCount = function(array) {
+    return _.reduce(array, function(count, customer) {
+        return customer.gender === 'female' ? count + 1 : count;
+    }, 0);
+};
 
-var youngestCustomer;
+var oldestCustomer = function(array) {
+    return _.reduce(array, function(oldest, customer) {
+        return customer.age > oldest.age ? customer : oldest;
+    }).name;
+};
 
-var averageBalance;
+var youngestCustomer = function(array) {
+    return _.reduce(array, function(youngest, customer) {
+        return customer.age < youngest.age ? customer : youngest;
+    }).name;
+};
+var averageBalance = function(array) {
+    let totalBalance = _.reduce(array, function(sum, customer) {
+        return sum + parseFloat(customer.balance.replace(/[$,]/g, ''));
+    }, 0);
+    return totalBalance / array.length;
+};
+var firstLetterCount = function(array, letter) {
+    return _.reduce(array, function(count, customer) {
+        return customer.name[0].toLowerCase() === letter.toLowerCase() ? count + 1 : count;
+    }, 0);
+};
+var friendFirstLetterCount = function(array, customerName, letter) {
+    let customer = _.find(array, function(cust) {
+        return cust.name === customerName;
+    });
+    return _.reduce(customer.friends, function(count, friend) {
+        return friend.name[0].toLowerCase() === letter.toLowerCase() ? count + 1 : count;
+    }, 0);
+};
+var friendsCount = function(array, name) {
+    return _.reduce(array, function(friendsList, customer) {
+        if (_.some(customer.friends, { name })) {
+            friendsList.push(customer.name);
+        }
+        return friendsList;
+    }, []);
+};
+var topThreeTags = function(array) {
+    let tagCounts = _.reduce(array, function(counts, customer) {
+        _.each(customer.tags, function(tag) {
+            counts[tag] = (counts[tag] || 0) + 1;
+        });
+        return counts;
+    }, {});
+    return Object.keys(tagCounts).sort((a, b) => tagCounts[b] - tagCounts[a]).slice(0, 3);
+};
+var genderCount = function(array) {
+    return _.reduce(array, function(counts, customer) {
+        counts[customer.gender] = (counts[customer.gender] || 0) + 1;
+        return counts;
+    }, {});
+};
 
-var firstLetterCount;
 
-var friendFirstLetterCount;
 
-var friendsCount;
-
-var topThreeTags;
-
-var genderCount;
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
