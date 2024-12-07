@@ -66,12 +66,18 @@ var friendFirstLetterCount = function(array, customerName, letter) {
 };
 var friendsCount = function(array, name) {
     return _.reduce(array, function(friendsList, customer) {
-        if (_.some(customer.friends, { name })) {
-            friendsList.push(customer.name);
+        // Check if the customer has a friend with the matching name
+        if (_.some(customer.friends, function(friend) {
+            return friend.name === name;
+        })) {
+            friendsList.push(customer.name); // Add customer name to the list
         }
         return friendsList;
-    }, []);
+    }, []); // Start with an empty array
 };
+
+
+
 var topThreeTags = function(array) {
     let tagCounts = _.reduce(array, function(counts, customer) {
         _.each(customer.tags, function(tag) {
