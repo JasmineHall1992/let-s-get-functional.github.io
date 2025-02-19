@@ -41,21 +41,26 @@ var femaleCount = function(array){
 }
 
 
-var femaleCount = function(array){
-    var filteredWomen = array.filter(function(customer){ 
-        return customer.gender === 'female';
-    });
-
-    return filteredWomen.length;
-}
-
 var oldestCustomer = function(array){
 
 };
 
 var youngestCustomer;
 
-var averageBalance;
+var averageBalance = function(array){
+    //get total balance
+    var total = array.reduce(function(acc, current){
+            var balance = current.balance;
+            var replaced = balance.replace(/[$,]/g, "");
+
+            acc += Number(replaced);
+            return acc;
+
+    }, 0);
+
+    //return total balance/customers
+    return total/array.length;
+}
 
 var firstLetterCount = function(array, letter){
     //use reduce to COUNT matching names
@@ -108,9 +113,10 @@ var topThreeTags;
 
 var genderCount = function(array){
     const genders = array.reduce(function(acc, current){
+        //determine if the current customer's genfer ALREADY ecusts as a key in an acc
         if (acc.hasOwnProperty(current.gender)){
             acc[current.gender] += 1
-        } else {
+        } else { // else it foesnt and we need to create it and give it a value of 1
             acc[current.gender] = 1;
         }
         return acc;
