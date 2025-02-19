@@ -40,21 +40,84 @@ var femaleCount = function(array){
     return filteredWomen.length;
 }
 
-var oldestCustomer;
+
+var femaleCount = function(array){
+    var filteredWomen = array.filter(function(customer){ 
+        return customer.gender === 'female';
+    });
+
+    return filteredWomen.length;
+}
+
+var oldestCustomer = function(array){
+
+};
 
 var youngestCustomer;
 
 var averageBalance;
 
-var firstLetterCount;
+var firstLetterCount = function(array, letter){
+    //use reduce to COUNT matching names
+    return array.reduce(function(acc, currentValue) {
+        if (customer.name[0].toLowerCase() === letter.toLowerCase()){
+            acc++
+        }
+        return acc;
+    }, 0);
+};
+//I: array, customers name(string), given letter(string/character?)
+//O: a number of names that start with that given letter
+var friendFirstLetterCount = function(array, customer, letter) {
+    // Step 1: Find the customer object in the array
+    let customersName = array.find(c => c.name === customer);
 
-var friendFirstLetterCount;
+    // Step 2: If the customer is not found, return 0
+    if (!customersName) return 0;
 
-var friendsCount;
+    // Step 3: Access the customer's friends array
+    let friendsArray = customersName.friends;
+
+    // Step 4: Count the friends whose names start with the given letter
+    let count = friendsArray.filter(friend => friend.name[0].toLowerCase() === letter.toLowerCase()).length;
+
+    // Step 5: Return the count
+    return count;
+};
+
+var friendsCount = function(array, name) {
+    //use filter to get new array of customers who are friends with 'name'
+    const filtered = array.filter(function(customer){
+        //return true if name is friendfs with Olga
+        for (let i = 0; i < customer.friends.length; i ++){
+            if (customer.friends[i].name === name){
+                return true;
+            }
+        }
+        return false;
+
+    });
+    //return the result of mapping through the filtered
+    return filtered.map(function(customer){
+        return customer.name; 
+    });
+};
+
 
 var topThreeTags;
 
-var genderCount;
+var genderCount = function(array){
+    const genders = array.reduce(function(acc, current){
+        if (acc.hasOwnProperty(current.gender)){
+            acc[current.gender] += 1
+        } else {
+            acc[current.gender] = 1;
+        }
+        return acc;
+
+    }, {});
+};
+
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
