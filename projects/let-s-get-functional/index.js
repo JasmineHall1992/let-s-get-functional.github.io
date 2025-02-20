@@ -65,7 +65,7 @@ var youngestCustomer = function(array){
     let youngestAge = Infinity; //you need a very high number
     let youngestName = "";
     //loop through the array
-    if (let i = 0; i < array.length; i++){
+    for (let i = 0; i < array.length; i++){
         if (array[i].age < youngestAge){
             youngestAge = array[i].age;
             youngestName = array[i].name;
@@ -136,8 +136,24 @@ var friendsCount = function(array, name) {
     });
 };
 
+//I: array
+//O: array
+const topThreeTags = (customers) => {
+    // Step 1: Extract all tags and flatten into a single array
+    const allTags = customers.flatMap(customer => customer.tags || []);
 
-var topThreeTags;
+    // Step 2: Count the occurrences of each tag
+    const tagCounts = allTags.reduce((acc, tag) => {
+        acc[tag] = (acc[tag] || 0) + 1;
+        return acc;
+    }, {});
+
+    // Step 3: Sort tags by frequency in descending order
+    const sortedTags = Object.keys(tagCounts).sort((a, b) => tagCounts[b] - tagCounts[a]);
+
+    // Step 4: Return the top three tags
+    return sortedTags.slice(0, 3);
+};
 
 var genderCount = function(array){
     const genders = array.reduce(function(acc, current){
