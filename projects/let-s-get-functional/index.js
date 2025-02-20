@@ -40,12 +40,39 @@ var femaleCount = function(array){
     return filteredWomen.length;
 }
 
-
+//I: array
+//O: string (the customer's name)
+//relevant properties: the customer's age and the customer's name (what we are returning)
 var oldestCustomer = function(array){
+    //start with an initial value
+    let oldestAge = 0;
+    let oldestName = "";
+    //loop through the array
+    for (let i = 0; i < array.length; i++) {
+        if (array[i].age > oldestAge){
+            oldestAge = array[i].age;
+            oldestName = array[i].name;
+        }
+    }
+        return oldestName;
+    };
 
-};
 
-var youngestCustomer;
+//I: array
+//O: string
+//we are looking at the youngest customers age and returning their name
+var youngestCustomer = function(array){
+    let youngestAge = Infinity; //you need a very high number
+    let youngestName = "";
+    //loop through the array
+    if (let i = 0; i < array.length; i++){
+        if (array[i].age < youngestAge){
+            youngestAge = array[i].age;
+            youngestName = array[i].name;
+        }
+    }
+        return youngestName;
+    };
 
 var averageBalance = function(array){
     //get total balance
