@@ -93,7 +93,7 @@ var averageBalance = function(array){
 var firstLetterCount = function(array, letter){
     //use reduce to COUNT matching names
     return array.reduce(function(acc, currentValue) {
-        if (customer.name[0].toLowerCase() === letter.toLowerCase()){
+        if (currentValue.name[0].toLowerCase() === letter.toLowerCase()){
             acc++
         }
         return acc;
