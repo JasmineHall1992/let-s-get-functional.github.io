@@ -50,6 +50,7 @@ var youngestCustomer;
 var averageBalance = function(array){
     //get total balance
     var total = array.reduce(function(acc, current){
+            ///acc = 0// current = {Adele Mullin}
             var balance = current.balance;
             var replaced = balance.replace(/[$,]/g, "");
 
@@ -122,6 +123,8 @@ var genderCount = function(array){
         return acc;
 
     }, {});
+
+    return genders;
 };
 
 
